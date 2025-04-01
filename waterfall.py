@@ -19,6 +19,10 @@ class Formulas:
     def __init__(self):
         self.matrix = [([None] * 13) for _ in range(len(dateValues))]
 
+class PipelineCreate:
+    def __init__(self):
+        self.values = []
+
 wb = xw.Book('VBA and Python Interview Exercise v1.xlsx')
 wb.app.calculation = 'automatic'
 
@@ -31,6 +35,7 @@ dateValues = wsOutput.range("I2:AR2").value
 
 aRegion = AssumptionRegion()
 formulas = Formulas()
+create = PipelineCreate()
 
 def getAssumptionsDF():
     numRowsAssumptions = wsAssumptions.used_range.rows.count
@@ -168,7 +173,7 @@ def buildCellCatalogue(refMatrix, salesCycleConsts, prodSplitConst):
 
     print(refMatrix[0][0] + '*' + refMatrix[0][1])
     for n in range(0, len(refMatrix)):
-
+        create.values.append(refMatrix[n][0] + '*' + refMatrix[n][1])
         for m in range(0, len(salesCycleConsts)):
             nonConsts = prodSplitConst
 
@@ -219,6 +224,15 @@ def BuildWaterfall():
             
     return
 
+def BuildPipelineCreate():
+    for x in range(0, len(create.values)):
+        wsOutput.range((17,9+x)).color = (11, 48, 64)
+        wsOutput.range((17,9+x)).value = 'Create'
+        wsOutput.range((17,9+x)).font.color = (255, 255, 255)
+        wsOutput.range((18,9+x)).value = '=' + create.values[x]
+        wsOutput.range((18,9+x)).number_format = '#,##0'
+    return
+
 getAssumptionsDF()
 prodSplitConst = GetProductSplitConstant(aRegion.region[2])
 salesCycleConsts = GetSalesCycleConstants(aRegion.region[5])
@@ -227,5 +241,6 @@ cycleRegions()
 refMatrix = runThroughDates()
 catalogue = buildCellCatalogue(refMatrix, salesCycleConsts, prodSplitConst)
 builFormulas(catalogue)
-
+print(len(create.values))
 BuildWaterfall()
+BuildPipelineCreate()
