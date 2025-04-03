@@ -266,7 +266,7 @@ def convertDateToQuarter(currentDate):
 
     return quarterNum
 
-def buildCellCatalogue(refMatrix, salesCycleConsts, prodSplitConst):
+def buildCellCatalogue(calcMatrix, salesCycleConsts, prodSplitConst):
     """
     Builds the cell catalogue. The cell catalogue is a multi-dimensional list where
     each value stored is a string that represents a single formula for the given dimensions
@@ -285,17 +285,17 @@ def buildCellCatalogue(refMatrix, salesCycleConsts, prodSplitConst):
     """
     catalogue = [([None] * len(salesCycleConsts)) for _ in range(len(refMatrix))]
 
-    print(refMatrix[0][0] + '*' + refMatrix[0][1])
-    for n in range(0, len(refMatrix)):
-        create.values.append(refMatrix[n][0] + '*' + refMatrix[n][1])
+    # print(refMatrix[0][0] + '*' + refMatrix[0][1])
+    for n in range(0, len(calcMatrix)):
+        # create.values.append(refMatrix[n][0] + '*' + refMatrix[n][1])
         for m in range(0, len(salesCycleConsts)):
-            nonConsts = prodSplitConst
+            # nonConsts = prodSplitConst
 
-            for p in range(0, len(refMatrix[n])):
-                if refMatrix[n][p] != None:
-                    nonConsts += '*' + refMatrix[n][p]
+            # for p in range(0, len(refMatrix[n])):
+            #     if refMatrix[n][p] != None:
+            #         nonConsts += '*' + refMatrix[n][p]
 
-            catalogue[n][m] = '(' + salesCycleConsts[m] + '*' + nonConsts  + ')'
+            catalogue[n][m] = '(' + calcMatrix[n] + '*' + salesCycleConsts[m] + ')'
 
     return catalogue
 
@@ -398,23 +398,62 @@ def BuildWaterfall():
             wsOutput.range((3+y,9+x)).value = '=' + formulas.matrix[x][y]
     return
 
-def BuildPipelineCreate():
+def BuildPipelineCreate(refMatrix, prodSplitConst):
     """
     Inserts the pipeline create formulas (headcount x productivity) the corresponds
     to the dimensions for that date.
-     
+    
     Args:
         None
     Returns:
         None
     """
-    for x in range(0, len(create.values)):
-        wsOutput.range((17,9+x)).color = (11, 48, 64)
-        wsOutput.range((17,9+x)).value = 'Create'
-        wsOutput.range((17,9+x)).font.color = (255, 255, 255)
-        wsOutput.range((18,9+x)).value = '=' + create.values[x]
-        wsOutput.range((18,9+x)).number_format = '#,##0'
-    return
+
+    calcMatrix = []
+
+    wsOutput.range((17,8),(21,8)).color = (11, 48, 64)
+    wsOutput.range((17,8),(21,8)).font.color = (255, 255, 255)
+    # wsOutput.range((21,8)).color = (0, 102, 0)
+    wsOutput.range((17,8)).value = 'Create'
+    wsOutput.range((18,8)).value = 'Source Split'
+    wsOutput.range((19,8)).value = 'Deal Type'
+    wsOutput.range((20,8)).value = 'Product Split'
+    wsOutput.range((21,8)).value = 'Calculated'
+    
+    for x in range(0, len(refMatrix)):
+        calcArray = []
+        wsOutput.range((16,9+x)).color = (221, 221, 221)
+        # wsOutput.range((21,9+x)).color = (204, 255, 204)
+        wsOutput.range((21,9+x)).color = (235, 235, 235)
+        for y in range(0, 4):
+            currentCell = wsOutput.range((17+y,9+x))
+            if y == 0:
+                currentCell.value = '=(' + refMatrix[x][0] + '*' + refMatrix[x][1] + ')'
+                currentCell.number_format = '#,##0'
+            elif y == 3:
+                currentCell.value = '=' + prodSplitConst
+                currentCell.number_format = '0.0%'
+            else:
+                currentCell.value = '=' + refMatrix[x][y+2] 
+                currentCell.number_format = '0.0%'
+            
+            calcArray.append(currentCell.get_address(False, False, include_sheetname=False))
+        
+        calcFormula = ''
+        for z in range(0, len(calcArray)): 
+            if z == 0:
+                calcFormula = calcArray[z]
+            else:
+                calcFormula += '*' + calcArray[z]
+            
+        calculatedCell = wsOutput.range((21,9+x))
+        calculatedCell.value = '=(' + calcFormula + ')'
+        calculatedCell.number_format = '#,##0'
+        calcMatrix.append(calculatedCell.get_address(False, False, include_sheetname=False))
+    
+    return calcMatrix
+
+    
 
 getAssumptionsDF()
 prodSplitConst = GetProductSplitConstant(aRegion.region[2])
@@ -422,8 +461,8 @@ salesCycleConsts = GetSalesCycleConstants(aRegion.region[5])
 
 cycleRegions()
 refMatrix = runThroughDates()
-catalogue = buildCellCatalogue(refMatrix, salesCycleConsts, prodSplitConst)
+calcMatrix = BuildPipelineCreate(refMatrix, prodSplitConst)
+catalogue = buildCellCatalogue(calcMatrix, salesCycleConsts, prodSplitConst)
+# print(catalogue)
 builFormulas(catalogue)
-print(len(create.values))
 BuildWaterfall()
-BuildPipelineCreate()
