@@ -19,10 +19,6 @@ class Formulas:
     def __init__(self):
         self.matrix = [([None] * 13) for _ in range(len(dateValues))]
 
-class PipelineCreate:
-    def __init__(self):
-        self.values = []
-
 wb = xw.Book('VBA and Python Interview Exercise v1.xlsx')
 wb.app.calculation = 'automatic'
 
@@ -35,7 +31,6 @@ dateValues = wsOutput.range("I2:AR2").value
 
 aRegion = AssumptionRegion()
 formulas = Formulas()
-create = PipelineCreate()
 
 def getAssumptionsDF():
     """
@@ -285,15 +280,8 @@ def buildCellCatalogue(calcMatrix, salesCycleConsts, prodSplitConst):
     """
     catalogue = [([None] * len(salesCycleConsts)) for _ in range(len(refMatrix))]
 
-    # print(refMatrix[0][0] + '*' + refMatrix[0][1])
     for n in range(0, len(calcMatrix)):
-        # create.values.append(refMatrix[n][0] + '*' + refMatrix[n][1])
         for m in range(0, len(salesCycleConsts)):
-            # nonConsts = prodSplitConst
-
-            # for p in range(0, len(refMatrix[n])):
-            #     if refMatrix[n][p] != None:
-            #         nonConsts += '*' + refMatrix[n][p]
 
             catalogue[n][m] = '(' + calcMatrix[n] + '*' + salesCycleConsts[m] + ')'
 
@@ -413,7 +401,6 @@ def BuildPipelineCreate(refMatrix, prodSplitConst):
 
     wsOutput.range((17,8),(21,8)).color = (11, 48, 64)
     wsOutput.range((17,8),(21,8)).font.color = (255, 255, 255)
-    # wsOutput.range((21,8)).color = (0, 102, 0)
     wsOutput.range((17,8)).value = 'Create'
     wsOutput.range((18,8)).value = 'Source Split'
     wsOutput.range((19,8)).value = 'Deal Type'
@@ -423,7 +410,6 @@ def BuildPipelineCreate(refMatrix, prodSplitConst):
     for x in range(0, len(refMatrix)):
         calcArray = []
         wsOutput.range((16,9+x)).color = (221, 221, 221)
-        # wsOutput.range((21,9+x)).color = (204, 255, 204)
         wsOutput.range((21,9+x)).color = (235, 235, 235)
         for y in range(0, 4):
             currentCell = wsOutput.range((17+y,9+x))
@@ -453,7 +439,6 @@ def BuildPipelineCreate(refMatrix, prodSplitConst):
     
     return calcMatrix
 
-    
 
 getAssumptionsDF()
 prodSplitConst = GetProductSplitConstant(aRegion.region[2])
@@ -463,6 +448,5 @@ cycleRegions()
 refMatrix = runThroughDates()
 calcMatrix = BuildPipelineCreate(refMatrix, prodSplitConst)
 catalogue = buildCellCatalogue(calcMatrix, salesCycleConsts, prodSplitConst)
-# print(catalogue)
 builFormulas(catalogue)
 BuildWaterfall()
