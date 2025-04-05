@@ -1,0 +1,147 @@
+
+body {
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.section-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    text-align: center;
+    max-width: 80%;
+}
+
+.modal-formatter {
+    padding: 30px 0;
+}
+
+.modal-element {
+    padding: 10px 60px;
+    box-shadow: 0 0 16px 0 rgba(0,0,0,0.3);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-subsection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#choose-file {
+    height: 100px;
+    width: 100px;
+}
+
+section#form-profile {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-settings-field {
+    margin: 5px 0px 5px 0px;
+}
+
+input#upload-excel {
+    display: none;
+}
+
+.custom-file-upload {
+    outline: 1px solid #ccc;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 6px 6px;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-property: outline, color;
+}
+
+.custom-file-upload:hover {
+    outline: 1px solid var(--chat-solid);
+    color: var(--chat-solid);
+}
+
+.file-upload-info {
+    margin: 0px 0px 4px 0px;
+    max-width: 120px;
+    opacity: 0;
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-property: opacity;
+}
+
+input#profile-submit {
+    margin-top: 3px;
+    display: none;
+    opacity: 0;
+    cursor: pointer;
+    padding: 3px 6px;
+    background-color: #00000000;
+    outline: 1px solid #ccc;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-property: opacity, outline, color;
+}
+
+input#profile-submit:hover {
+    outline: 1px solid var(--chat-solid);
+    color: var(--chat-solid);
+}
+
+#profile-upload-status {
+    margin: 0px 0px 4px 0px;
+    /* max-width: 120px; */
+    opacity: 0;
+    font-size: 12px;
+    /* color: rgb(253, 49, 49); */
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-property: opacity;
+}
+
+#profile-display-container {
+    display: none;
+    flex-direction: column;
+    justify-content: end;
+    /* height: 80px;
+    width: 80px;
+    border-radius: 50%; */
+    padding: 48px 10px;
+}
+
+#profile-display-icon {
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    justify-content: center;
+    /* margin-bottom: 8px; */
+}
+
+#profile-settings-image {
+    display: flex;
+    height: 80px;
+    align-content: center;
+    /* border-radius: 40px; */
+}

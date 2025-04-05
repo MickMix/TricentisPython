@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/main.css">
+    <title>Excel Reader</title>
+</head>
+
+<body>
+    <section id="upload" class="section-modal">
+        <div class="modal-formatter">
+            <div class="modal-element">
+                <div id="choose-file" class="modal-subsection">
+                    <form id="profile-settings-form" action="#" method="POST" autocomplete="off">
+                        <div class="profile-settings-field image">
+                            <label for="upload-excel" class="custom-file-upload">
+                                <i class="fa fa-file-image-o"></i> Select File
+                            </label>
+                            <input id="upload-excel" type="file" name="image" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                        </div>
+                        <div id="file-upload-name" class="file-upload-info"></div>
+                        <div id="file-upload-type" class="file-upload-info"></div>
+                        <div class="profile-settings-field button">
+                            <input id="profile-submit" type="submit" name="submit" value="Submit">
+                        </div>
+                        <div id="profile-upload-status"></div>
+                    </form>
+                </div>
+                <div id="upload-file">
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="options" class="section-modal">
+
+    </section>
+    <section id="output">
+
+    </section>
+    <script src="../static/index.js"></script>
+</body>
