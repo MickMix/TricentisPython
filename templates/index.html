@@ -9,36 +9,155 @@
 </head>
 
 <body>
-    <section id="upload" class="section-modal">
-        <div class="modal-formatter">
-            <div class="modal-element">
-                <div id="choose-file" class="modal-subsection">
-                    <form id="profile-settings-form" action="#" method="POST" autocomplete="off">
-                        <div class="profile-settings-field image">
-                            <label for="upload-excel" class="custom-file-upload">
-                                <i class="fa fa-file-image-o"></i> Select File
-                            </label>
-                            <input id="upload-excel" type="file" name="image" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                        </div>
-                        <div id="file-upload-name" class="file-upload-info"></div>
-                        <div id="file-upload-type" class="file-upload-info"></div>
-                        <div class="profile-settings-field button">
-                            <input id="profile-submit" type="submit" name="submit" value="Submit">
-                        </div>
-                        <div id="profile-upload-status"></div>
-                    </form>
-                </div>
-                <div id="upload-file">
-
+    <div id="page-container">
+        <section id="upload" class="section-modal">
+            <div class="modal-formatter">
+                <div class="modal-element">
+                    <div id="choose-file" class="modal-subsection">
+                        <form id="profile-settings-form" action="#" method="POST" autocomplete="off">
+                            <div class="profile-settings-field image">
+                                <label for="upload-excel" class="custom-file-upload">
+                                    <i class="fa fa-file-image-o"></i> Select File
+                                </label>
+                                <input id="upload-excel" type="file" name="excel-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                            </div>
+                            <div id="file-upload-name" class="file-upload-info"></div>
+                            <div id="file-upload-type" class="file-upload-info"></div>
+                            <div class="profile-settings-field button">
+                                <input id="profile-submit" type="submit" name="submit" value="Submit">
+                            </div>
+                            <div id="profile-upload-status"></div>
+                        </form>
+                    </div>
+                    <div id="upload-file">
+    
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section id="options" class="section-modal">
-
-    </section>
-    <section id="output">
-
-    </section>
+        </section>
+        <section id="options" class="section-modal">
+    
+        </section>
+        <section id="output">
+            <div id="table-container">
+                <div id="table-wrap">
+                    
+                </div>
+            </div>
+            <div id="cell-data">
+                <!-- <div class="cell-data-container">
+                    <div class="cell-data-wrap">
+                        <p class="formula-text">Value: </p>
+                        <div class="cell-data formula">
+                            <div class="formula-wrap">
+                                <p class="formula-text">
+                                    =<span data-span-color="red" class="formula-value">2.022</span>*<span data-span-color="orange" class="formula-value">925173.8477</span>*<span data-span-color="yellow" class="formula-value">0.6184</span>*<span data-span-color="green" class="formula-value">0.7768</span>*<span data-span-color="blue" class="formula-value">0.526</span>*<span data-span-color="indigo" class="formula-value">0.0249</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="cell-data data-description">
+                            
+                        <div class="data-description-formatter">
+                            <div class="data-description-wrap">
+                                <div class="data-key">
+                                    <p class="key-text">Table:</p>
+                                    <p class="key-text">Value:</p>
+                                    <p class="key-text">Worksheet:</p>
+                                    <p class="key-text">Address:</p>
+                                </div>
+                                <div class="data-value">
+                                    <p class="value-text">Headcount</p>
+                                    <p class="value-text"><span data-span-color="red" class="formula-value">2.022</span></p>
+                                    <p class="value-text">Assumptions</p>
+                                    <p class="value-text">$K$242</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-description-formatter">
+                            <div class="data-description-wrap">
+                                <div class="data-key">
+                                    <p class="key-text">Table:</p>
+                                    <p class="key-text">Value:</p>
+                                    <p class="key-text">Worksheet:</p>
+                                    <p class="key-text">Address:</p>
+                                </div>
+                                <div class="data-value">
+                                    <p class="value-text">Productivity</p>
+                                    <p class="value-text"><span data-span-color="orange" class="formula-value">925173.8477</span></p>
+                                    <p class="value-text">Assumptions</p>
+                                    <p class="value-text">$K$2196</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-description-formatter">
+                            <div class="data-description-wrap">
+                                <div class="data-key">
+                                    <p class="key-text">Table:</p>
+                                    <p class="key-text">Value:</p>
+                                    <p class="key-text">Worksheet:</p>
+                                    <p class="key-text">Address:</p>
+                                </div>
+                                <div class="data-value">
+                                    <p class="value-text">Source Split</p>
+                                    <p class="value-text"><span data-span-color="yellow" class="formula-value">0.6184</span></p>
+                                    <p class="value-text">Assumptions</p>
+                                    <p class="value-text">$K$3609</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-description-formatter">
+                            <div class="data-description-wrap">
+                                <div class="data-key">
+                                    <p class="key-text">Table:</p>
+                                    <p class="key-text">Value:</p>
+                                    <p class="key-text">Worksheet:</p>
+                                    <p class="key-text">Address:</p>
+                                </div>
+                                <div class="data-value">
+                                    <p class="value-text">Deal Type</p>
+                                    <p class="value-text"><span data-span-color="green" class="formula-value">0.7768</span></p>
+                                    <p class="value-text">Assumptions</p>
+                                    <p class="value-text">$K$6070</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-description-formatter">
+                            <div class="data-description-wrap">
+                                <div class="data-key">
+                                    <p class="key-text">Table:</p>
+                                    <p class="key-text">Value:</p>
+                                    <p class="key-text">Worksheet:</p>
+                                    <p class="key-text">Address:</p>
+                                </div>
+                                <div class="data-value">
+                                    <p class="value-text">Product Split</p>
+                                    <p class="value-text"><span data-span-color="blue" class="formula-value">0.526</span></p>
+                                    <p class="value-text">Assumptions</p>
+                                    <p class="value-text">$K$2829</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-description-formatter">
+                            <div class="data-description-wrap">
+                                <div class="data-key">
+                                    <p class="key-text">Table:</p>
+                                    <p class="key-text">Value:</p>
+                                    <p class="key-text">Worksheet:</p>
+                                    <p class="key-text">Address:</p>
+                                </div>
+                                <div class="data-value">
+                                    <p class="value-text">Sales Cycle</p>
+                                    <p class="value-text"><span data-span-color="indigo" class="formula-value">0.0249</span></p>
+                                    <p class="value-text">Assumptions</p>
+                                    <p class="value-text">$K$6676</p>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div></div> -->
+            </div>
+        </section>
+    </div>
+    
     <script src="../static/index.js"></script>
 </body>
